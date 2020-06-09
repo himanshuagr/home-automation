@@ -1,6 +1,6 @@
 var express= require('express');
 var bodyparser=require('body-parser');
-
+require('./mongodbconnect');
 var app=express();
 app.use(bodyparser.json());
 
