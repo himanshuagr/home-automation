@@ -11,7 +11,7 @@ router.get('/',(req,res)=>{
     })
 })
 
-router.get('/status/',(req,res)=>{
+router.get('/status',(req,res)=>{
 
     if(!req.body)
       return res.status(404).json({
