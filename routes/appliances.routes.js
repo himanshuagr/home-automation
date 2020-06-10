@@ -25,39 +25,39 @@ router.get('/status',(req,res)=>{
      if(response)
      { 
        if(req.query.type=='temperature')
-       res.json({
+       res.status(200).json({
          temperature:response.temperature
        });
        else if(req.query.type=='humidity')
-       res.json({
+       res.status(200).json({
          humidity:response.humidity
        });
        else if(req.query.type=='gas_level')
-       res.json({
+       res.status(200).json({
          gas_level:response.gas_level
        });
        else if(req.query.type=='cooler')
-       res.json({
+       res.status(200).json({
          cooler:response.cooler
        });
        else if(req.query.type=='fan')
-       res.json({
+       res.status(200).json({
          fan:response.fan
        });
        else if(req.query.type=='light1')
-       res.json({
+       res.status(200).json({
          light1:response.light1
        });
        else if(req.query.type=='light2')
-       res.json({
+       res.status(200).json({
          light2:response.light2
        });
        else if(req.query.type=='light3')
-       res.json({
+       res.status(200).json({
          light3:response.light3
        });
        else if(req.query.type=='motion')
-       res.json({
+       res.status(200).json({
          motion:response.motion
        });
        else
