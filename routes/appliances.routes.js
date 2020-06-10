@@ -18,11 +18,11 @@ router.get('/status',(req,res)=>{
           message:"request body is empty"
       });
     
-     appliances.findById({_id:id}).exec((error,response)=>{
+     appliances.find().exec((error,response)=>{
       if(error)
       return res.send(error);
-
-     if(response)
+      console.log(response);
+     /*if(response)
      { 
     if(req.query.type=='temperature')
        res.json({
@@ -68,7 +68,7 @@ router.get('/status',(req,res)=>{
        else
         res.send({
           message:"no response recieved"
-        });
+        });*/
      });
 });
 
