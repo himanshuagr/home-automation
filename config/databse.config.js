@@ -1,3 +1,3 @@
 module.exports={
-    url:"mongodb://127.0.0.1:27017"
+    url:"mongodb+srv://him9875:hyx110@home-automation-isox0.gcp.mongodb.net/appliances"
 }
