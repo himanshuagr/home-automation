@@ -1,8 +1,7 @@
 const mongoose=require('mongoose');
-const databseurl=require('./config/databse.config');
 const appliance=require('./models/appliance.model');
-
-mongoose.connect(databseurl.url,{
+const mongourl="mongodb+srv://him9875:hyx110@home-automation-isox0.gcp.mongodb.net/appliances?retryWrites=true&w=majority";
+mongoose.connect(mongourl,{
     useCreateIndex:true,
     useNewUrlParser:true
 }).then(()=>console.log("database connected successfully"))
