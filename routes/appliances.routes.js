@@ -13,7 +13,7 @@ router.get('/',(req,res)=>{
 router.get('/status/',(req,res)=>{
 
     if(!req.body)
-      return res.status(404).send({
+      return res.status(404).json({
           message:"request body is empty"
       });
      
@@ -21,44 +21,46 @@ router.get('/status/',(req,res)=>{
      appliances.findById({_id:id},(error,response)=>{
        if(error)
          return res.send(error);
+
+         
        if(req.query.type=='temperature')
-          res.status(200).send({
+          res.json({
             temperature:response.temperature
           });
-          if(req.query.type=='humidity')
-          res.status(200).send({
+          else if(req.query.type=='humidity')
+          res.json({
             humidity:response.humidity
           });
-          if(req.query.type=='gas_level')
-          res.status(200).send({
+          else if(req.query.type=='gas_level')
+          res.json({
             gas_level:response.gas_level
           });
-          if(req.query.type=='cooler')
-          res.status(200).send({
+          else if(req.query.type=='cooler')
+          res.json({
             cooler:response.cooler
           });
-          if(req.query.type=='fan')
-          res.status(200).send({
+          else if(req.query.type=='fan')
+          res.json({
             fan:response.fan
           });
-          if(req.query.type=='light1')
-          res.status(200).send({
+          else if(req.query.type=='light1')
+          res.json({
             light1:response.light1
           });
-          if(req.query.type=='light2')
-          res.status(200).send({
+          else if(req.query.type=='light2')
+          res.json({
             light2:response.light2
           });
-          if(req.query.type=='light3')
-          res.status(200).send({
+          else if(req.query.type=='light3')
+          res.json({
             light3:response.light3
           });
-          if(req.query.type=='motion')
-          res.status(200).send({
+          else if(req.query.type=='motion')
+          res.json({
             motion:response.motion
           });
           else
-            res.status(500).send({
+            res.status(500).json({
               message: "invalid query"
             })
      })
