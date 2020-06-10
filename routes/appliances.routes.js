@@ -4,6 +4,12 @@ const router=new express.Router();
 
 const id = '5ee0a1a10a3a153878d9e70d';
 
+router.get('/',(req,res)=>{
+    res.send(200).send({
+      message:"Hii"
+    })
+})
+
 router.get('/status/',(req,res)=>{
 
     if(!req.body)
