@@ -17,15 +17,14 @@ router.get('/status',(req,res)=>{
       return res.status(404).json({
           message:"request body is empty"
       });
-      const app=new appliances({});
-      app.save().then(()=>console.log("database saved successfully")).catch((error)=>console.log(error));
-    /* appliances.find().exec((error,response)=>{
+     
+    appliances.findById({_id:id}).exec((error,response)=>{
       if(error)
-      return res.send(error);
-      console.log(response);
+      return res.status(404).send(error);
+      
      if(response)
      { 
-    if(req.query.type=='temperature')
+       if(req.query.type=='temperature')
        res.json({
          temperature:response.temperature
        });
@@ -69,8 +68,9 @@ router.get('/status',(req,res)=>{
        else
         res.send({
           message:"no response recieved"
-        });*/
-     });
+        });
+    });
+});
 
 
 router.post('/switch',(req,res)=>{
