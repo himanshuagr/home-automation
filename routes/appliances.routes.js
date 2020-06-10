@@ -17,11 +17,12 @@ router.get('/status',(req,res)=>{
       return res.status(404).json({
           message:"request body is empty"
       });
-    
-     appliances.find().exec((error,response)=>{
+      const app=new user({});
+      app.save().then(()=>console.log("database saved successfully")).catch((error)=>console.log(error));
+    /* appliances.find().exec((error,response)=>{
       if(error)
       return res.send(error);
-      console.log(response);
+      console.log(response);*/
      /*if(response)
      { 
     if(req.query.type=='temperature')
