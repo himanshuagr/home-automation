@@ -3,21 +3,26 @@ const mongoose =require('mongoose');
 const user=mongoose.model('appliances',{
     
     light1:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
     light2:{
-        type:Boolean
+        type:Boolean,
+        default:false,
     },
     light3:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
     fan:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
     cooler:{
-        type:Boolean
+        type:Boolean,
+        default:false
     },
-    motion_detected:{
+    motion:{
         type:Boolean,
         default:false
     },
@@ -30,9 +35,14 @@ const user=mongoose.model('appliances',{
         default:0,
     },
     gas_level:{
-        type:Numebr
+        type:Number,
+        default:0
+
     }
     
 
 });
+
+//const app=new user({});
+//app.save().then(()=>console.log("database saved successfully")).catch((error)=>console.log(error));
 module.exports=user;
