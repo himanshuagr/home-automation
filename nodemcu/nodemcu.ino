@@ -9,7 +9,8 @@ String ssid="Honor7x";
 String password="12345678";
 
 DHTesp dht;
-String url="https://home-automation-9875.herokuapp.com/status?type=humidity";
+String url="http://home-automation-9875.herokuapp.com/";
+
 
 void setup() {
   
@@ -51,14 +52,24 @@ void loop() {
      Serial.println("connected");
      digitalWrite(D5,HIGH);
      HTTPClient http;
-     http.begin(url);
+    /* http.begin(url);
      int httpcode=http.GET();
      if(httpcode>0)
      {
-           Serial.println("Ab");
-           String h=http.getString();
-           Serial.println(h);
-     }
+         DynamicJsonDocument doc(2048);                 //get request
+         deserializeJson(doc, http.getStream()); 
+         int temp=doc["temperature"].as<int>();
+         Serial.println(temp);     
+     }*/
+
+     String posturl=url+"switch";
+     http.begin(posturl);
+     DynamicJsonDocument doc(2048);
+     doc["temperature"]=50;
+     String json;
+     serializeJson(doc, json);
+     http.POST(json);
+     Serial.println(http.getString());
      http.end();
    }
    else
@@ -75,6 +86,6 @@ void loop() {
    }
   
    
-   delay(5000);
+   delay(1000);
  
 }

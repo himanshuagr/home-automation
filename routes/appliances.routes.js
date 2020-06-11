@@ -6,9 +6,7 @@ const id = '5ee0a1a10a3a153878d9e70d';
 const port=2000;
 
 router.get('/',(req,res)=>{
-    res.status(200).send({
-      message:"Hii"
-    })
+    res.status(200).
 })
 
 router.get('/status',(req,res)=>{
@@ -79,9 +77,12 @@ router.post('/switch',(req,res)=>{
       message:"request body is empty"
   });
  
-  appliances.findByIdAndUpdate({_id:id},req.body).then((response)=>res.send({
-    message:"successfully saved"
-  }))
+  appliances.findByIdAndUpdate({_id:id},req.body).then((res)=>{
+    res.status(200).send({
+      message:"succesfully saved"
+    });
+    console.log(req);
+  })
   .catch((error)=>res.status(502).send(error));
 
 });
