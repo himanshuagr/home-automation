@@ -64,11 +64,8 @@ void loop() {
 
     
      http.begin(url);
-   http.header("POST / HTTP/1.1");
-    http.header("Host: server_name");
-    http.header("Accept: */*");
-    http.header("Content-Type: application/x-www-form-urlencoded");
-    int httpCode = http.POST({"hiokjndkj"});
+     http.header("Content-Type: application/json");
+      int httpCode = http.POST("{\"api_key\":\"tPmAT5Ab3j7F9\",\"sensor\":\"BME280\",\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
     Serial.println(httpCode);
     
      Serial.println(http.getString());
