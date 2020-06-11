@@ -9,7 +9,7 @@ String ssid="Honor7x";
 String password="12345678";
 
 DHTesp dht;
-String url="http://home-automation-9875.herokuapp.com/";
+String url="http://home-automation-9875.herokuapp.com/switch";
 
 
 void setup() {
@@ -62,14 +62,14 @@ void loop() {
          Serial.println(temp);     
      }*/
 
-     String posturl=url+"switch";
-     http.begin(posturl);
-    DynamicJsonDocument doc(2048);
-     doc["temperature"]=50;
-     String json;
-     serializeJson(doc, json);
-     http.POST(json);
-     Serial.println(json);
+    
+     http.begin(url);
+   http.header("POST / HTTP/1.1");
+    http.header("Host: server_name");
+    http.header("Accept: */*");
+    http.header("Content-Type: application/x-www-form-urlencoded");
+    int httpCode = http.POST({"hiokjndkj"});
+    Serial.println(httpCode);
     
      Serial.println(http.getString());
      http.end();
