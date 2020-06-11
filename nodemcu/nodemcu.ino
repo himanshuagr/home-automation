@@ -64,11 +64,13 @@ void loop() {
 
      String posturl=url+"switch";
      http.begin(posturl);
-     DynamicJsonDocument doc(2048);
+    DynamicJsonDocument doc(2048);
      doc["temperature"]=50;
      String json;
      serializeJson(doc, json);
      http.POST(json);
+     Serial.println(json);
+    
      Serial.println(http.getString());
      http.end();
    }

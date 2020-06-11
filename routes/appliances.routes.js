@@ -83,7 +83,7 @@ router.post('/switch',(req,res)=>{
     res.status(200).send({
       message:"succesfully saved"
     });
-    console.log(req);
+    console.log(req.body);
   })
   .catch((error)=>res.status(502).send(error));
 
