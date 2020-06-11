@@ -4,13 +4,12 @@
 #include <DHTesp.h>
 
 #define INT_MAX 2147483647
+DHTesp dht;
 
 String ssid="Honor7x";
 String password="12345678";
-
-DHTesp dht;
 String url="http://home-automation-9875.herokuapp.com/switch";
-
+int gasThres=700;
 
 void setup() {
   
@@ -39,8 +38,7 @@ void setup() {
 }
 
 void loop() {
-
- 
+  
    int temperature;
    int humidity=dht.getHumidity();
    if(dht.getTemperature()!=INT_MAX)
@@ -49,29 +47,34 @@ void loop() {
      humidity=dht.getHumidity();  
    if(WiFi.status()==WL_CONNECTED)
    {
-     Serial.println("connected");
      digitalWrite(D5,HIGH);
      HTTPClient http;
-    /* http.begin(url);
-     int httpcode=http.GET();
-     if(httpcode>0)
-     {
-         DynamicJsonDocument doc(2048);                 //get request
-         deserializeJson(doc, http.getStream()); 
-         int temp=doc["temperature"].as<int>();
-         Serial.println(temp);     
-     }*/
-
-    
      http.begin(url);
      DynamicJsonDocument doc(2048);
-     doc["temperature"]=temperature;
+     if(dht.getTemperature()!=INT_MAX&&dht.getTemperature()!=NULL)
+        doc["temperature"]=dht.getTemperature();
+     if(dht.getHumidity()!=INT_MAX&&dht.getHumidity()!=NULL)
+        doc["humidity"]=dht.getHumidity();
+     int gas_level=analogRead(A0);
+     if(gas_level!=0&&gas_level!=INT_MAX)
+       doc["gas_level"]=gas_level;
+      if(gas_level>gasThres)
+         digitalWrite(D0,HIGH);
+      else
+         digitalWrite(D0,LOW);   
      http.addHeader("Content-Type", "application/json"); 
      String json;
      serializeJson(doc,json);
-     int httpCode = http.POST(json);
-    Serial.println(httpCode);
-    Serial.println(http.getString());
+     int httpcode = http.POST(json);
+     if(httpcode>0)
+     {
+         /*DynamicJsonDocument doc1(2048);                 //get request
+         deserializeJson(doc1, http.getStream()); 
+         int temp=doc["temperature"].as<int>();
+         Serial.println(temp);
+         */     
+         Serial.println(http.getString());
+     }
     http.end();
    }
    else

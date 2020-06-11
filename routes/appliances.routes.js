@@ -12,6 +12,7 @@ router.get('/',(req,res)=>{
 });
 
 router.get('/status',(req,res)=>{
+  
 
     if(!req.body)
       return res.status(404).json({
@@ -72,6 +73,20 @@ router.get('/status',(req,res)=>{
     });
 });
 
+router.get('/getdata',(req,res)=>{
+         
+    if(!req.body)
+    return res.status(404).json({
+        message:"request body is empty"
+    });
+    appliances.findById({_id:id}).exec((error,response)=>{
+      if(error)
+        return res.status(500).send(error);
+        res.status(200).send(response);
+    })
+   
+});
+
 
 router.post('/switch',(req,res)=>{
   if(!req.body)
@@ -86,8 +101,7 @@ router.post('/switch',(req,res)=>{
     res.status(500).send({
       message:"database error"
     })
-    console.log(req.headers);
-    console.log(req.body);
+ 
   })
   .catch((error)=>res.status(502).send(error));
 
