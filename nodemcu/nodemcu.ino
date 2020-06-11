@@ -64,12 +64,15 @@ void loop() {
 
     
      http.begin(url);
-     http.header("Content-Type: application/json");
-      int httpCode = http.POST("{\"api_key\":\"tPmAT5Ab3j7F9\",\"sensor\":\"BME280\",\"value1\":\"24.25\",\"value2\":\"49.54\",\"value3\":\"1005.14\"}");
+     DynamicJsonDocument doc(2048);
+     doc["temperature"]=temperature;
+     http.addHeader("Content-Type", "application/json"); 
+     String json;
+     serializeJson(doc,json);
+     int httpCode = http.POST(json);
     Serial.println(httpCode);
-    
-     Serial.println(http.getString());
-     http.end();
+    Serial.println(http.getString());
+    http.end();
    }
    else
    {

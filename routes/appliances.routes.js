@@ -80,8 +80,14 @@ router.post('/switch',(req,res)=>{
   });
  
   appliances.findByIdAndUpdate({_id:id},req.body).then((response)=>{
-    res.status(200).send(req.body);
+    if(response)
+    res.status(200).send(response);
+    else
+    res.status(500).send({
+      message:"database error"
+    })
     console.log(req.headers);
+    console.log(req.body);
   })
   .catch((error)=>res.status(502).send(error));
 
