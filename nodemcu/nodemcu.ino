@@ -9,7 +9,7 @@ DHTesp dht;
 String ssid="Honor7x";
 String password="12345678";
 String url="http://home-automation-9875.herokuapp.com/switch";
-int gasThres=700;
+int gasThres=570;
 
 void setup() {
   
@@ -39,12 +39,7 @@ void setup() {
 
 void loop() {
   
-   int temperature;
-   int humidity=dht.getHumidity();
-   if(dht.getTemperature()!=INT_MAX)
-     temperature=dht.getTemperature();
-   if(dht.getHumidity()!=INT_MAX)
-     humidity=dht.getHumidity();  
+  
    if(WiFi.status()==WL_CONNECTED)
    {
      digitalWrite(D5,HIGH);
@@ -68,12 +63,17 @@ void loop() {
      int httpcode = http.POST(json);
      if(httpcode>0)
      {
-         /*DynamicJsonDocument doc1(2048);                 //get request
+         DynamicJsonDocument doc1(2048);                 //get request
          deserializeJson(doc1, http.getStream()); 
-         int temp=doc["temperature"].as<int>();
-         Serial.println(temp);
-         */     
-         Serial.println(http.getString());
+         bool light1=doc1["light1"].as<bool>();
+         bool light2=doc1["light2"].as<bool>();
+         bool light3=doc1["light3"].as<bool>();
+         bool fan=doc1["fan"].as<bool>();
+         bool cooler=doc1["cooler"].as<bool>();
+         Serial.println(light1);
+         Serial.println(light2);
+         Serial.println(fan);
+         
      }
     http.end();
    }
