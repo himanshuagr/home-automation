@@ -21,6 +21,15 @@ exports.userRegister=async (req,res)=>{
 
        if(req.body)
        {
+              await usermodel.findone({mobile:req.body.mobile}).then((user)=>{
+                  res.status(401).send({
+                      "message":"user already registered"
+                  })
+              }).catch((error)=>{
+                res.status(401).send({
+                    "message":"Database error"
+                })
+              })
                 var newUser=new usermodel(req.body);
                 await newUser.save().then((user)=>{
                     var token=jwt.sign({mobile: user.mobile, name:user.name}, config.jwtPrivateKey);
