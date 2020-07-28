@@ -21,7 +21,7 @@ exports.userRegister=async (req,res)=>{
 
        if(req.body)
        {
-              await usermodel.findone({mobile:req.body.mobile}).then((user)=>{
+              await usermodel.findOne({mobile:req.body.mobile}).then((user)=>{
                   res.status(401).send({
                       "message":"user already registered"
                   })
