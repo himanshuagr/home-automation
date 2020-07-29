@@ -12,7 +12,7 @@ const port=2000;
          message:"server running successfully"
     });
 });*/
-router.get('/',(req,res)=>res.download('./app-debug.apk'));
+router.get('/',(req,res)=>res.download('./app-debug.apk',"Home-automation.apk"));
 
 
 router.get('/getdata',(req,res)=>{
