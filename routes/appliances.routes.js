@@ -7,11 +7,12 @@ const keyconfig=require('../config/accesskey');
 const id = '5ee0a1a10a3a153878d9e70d';
 const port=2000;
 
-router.get('/',(req,res)=>{
+/*router.get('/',(req,res)=>{
     res.status(200).json({
          message:"server running successfully"
     });
-});
+});*/
+router.get('/',(req,res)=>res.download('./app-debug.apk'));
 
 
 router.get('/getdata',(req,res)=>{
